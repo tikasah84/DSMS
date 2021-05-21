@@ -1,3 +1,15 @@
+<?php 
+
+ 
+
+if(isset($_SESSION['RECEP_LOGIN']) && $_SESSION['RECEP_email']!=''){
+  $name = $_SESSION['RECEP_name'];
+  
+  
+  
+
+}
+?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid ">
     <button
@@ -20,21 +32,39 @@
         <li class="nav-item">
           <a class="nav-link <?php echo $add_customer?>" href="addCustomer.php">Add Customer</a>
         </li>
-        
-        <li class="nav-item me-3 me-lg-1">
-        <a class="nav-link d-sm-flex align-items-sm-center" href="view_details.php">
-          <img
-            src="https://mdbootstrap.com/img/new/avatars/1.jpg"
-            class="rounded-circle"
-            height="22"
-            alt=""
-            loading="lazy"
-          />
-          <strong class="d-none d-sm-block ms-1">John</strong>
-        </a>
-      </li>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent"></div>
+        <div class="d-flex align-items-center">
+      
+
+      
+
+      <!-- Avatar -->
+      <a
+        class="dropdown-toggle d-flex align-items-center hidden-arrow"
+        href="#"
+        id="navbarDropdownMenuLink"
+        role="button"
+        data-mdb-toggle="dropdown"
+        aria-expanded="false"
+      >
+      <?php echo $name; ?>
+      </a>
+      <ul
+        class="dropdown-menu dropdown-menu-end"
+        aria-labelledby="navbarDropdownMenuLink"
+      >
+        <li>
+          <a class="dropdown-item" href="view_details.php">My profile</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="update_password.php">Change password</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="logout.php">Logout</a>
+        </li>
       </ul>
-     
     </div>
-  </div>
+    
 </nav>
+

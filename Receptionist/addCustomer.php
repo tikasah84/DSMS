@@ -1,4 +1,8 @@
-<?php $title = "Receptionist-Add Customer"; include('header.php'); ?>
+<?php $title = "Receptionist-Add Customer"; include('header.php');
+
+include('../Database/function.php');
+include('../Database/connection.php');
+?>
 <header>
  <?php $add_customer = "active";  include('navbar.php'); ?> 
 

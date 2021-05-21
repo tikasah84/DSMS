@@ -1,4 +1,27 @@
-<?php $title = "ADMIN-Dashboard"; include('header.php'); ?>
+<?php $title = "ADMIN-Dashboard"; include('header.php');
+
+
+
+
+include('../Database/function.php');
+include('../Database/connection.php');
+
+$count=0;
+ 
+
+
+
+if(isset($_SESSION['ADMIN_LOGIN']) && $_SESSION['ADMIN_username']!=''){
+  $res = $_SESSION['ADMIN_username'];
+  
+  
+
+}else{
+   header('location:login_admin.php');
+   die();
+}
+
+?>
 
 <body>
   <!--Main Navigation-->

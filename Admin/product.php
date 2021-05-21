@@ -1,7 +1,50 @@
-<?php $title = "ADMIN-Product"; include('header.php'); ?>
+<?php $title = "ADMIN-Product"; include('header.php'); 
+
+include('../Database/function.php');
+include('../Database/connection.php');
+?>
 <header>
 <?php $product = "active";  include('sidemenu.php'); ?>
-    <?php include('navbar.php') ?>
+    <?php include('navbar.php');
+    
+    
+    
+ if(isset($_GET['type']) && $_GET['type']!=''){
+   $type = get_safe_value($con,$_GET['type']);
+   if($type == 'status'){
+       $operation = get_safe_value($con,$_GET['operation']);
+       $id = get_safe_value($con,$_GET['id']);
+       if($operation == 'active')
+       {
+           $status = '1';
+       }
+       else{
+           $status = '0';
+       }
+       $update_status = "update `product` set status='$status' where id='$id' ";
+       mysqli_query($con,$update_status);
+   }
+}
+
+if(isset($_GET['type']) && $_GET['type']!=''){
+   $type = get_safe_value($con,$_GET['type']);
+   
+   if($type == 'delete'){
+      
+       $id = get_safe_value($con,$_GET['id']);
+      
+       $delete_sql = "delete from `product`  where id='$id' ";
+      
+       mysqli_query($con,$delete_sql);
+   }
+}
+
+
+
+
+    
+    
+    ?>
 
 
  
@@ -39,29 +82,43 @@
                                  </thead>
                                  <tbody>
                                  
+                                 <?php
+                                 $sql = "SELECT p.id,p.item,c.name,p.stock,p.rate,p.status from product p ,category c where p.cat_id=c.id";
+                                 $res = mysqli_query($con,$sql);
+                                 while($row = mysqli_fetch_assoc($res)) { ;?>      
                                  <tr>
-                                 
-                                      
-                                       <th></th>
-                                       <th></th>
-                                       <th></th>
-                                       <th></th>
-                                       <th></th>
+                                 <td><?php echo $row['id'] ?></td>
+                                 <td><?php echo $row['name'] ?></td>
+                                 <td><?php echo $row['item'] ?></td>
+                                 <td><?php echo $row['rate'] ?></td>
+                                 <td><?php echo $row['stock'] ?></td>
+        
+                        
+                                   
                                       
                                        <th>
-                                           
+                                       <?php
+                                         if($row['status']=='1'){
+                                          echo "<a href='?type=status&operation=deactive&id=".$row['id']."'><span class='badge bg-success text-white'>Active</span></a>";
+                                         } else{
+                                         
+                                      echo "<a href=?type=status&operation=active&id=".$row['id']."'> <span class='badge bg-primary text-white'>Deactive</span></a>";
+                                       
+                                        }
+                                        echo "<a href='manage_product.php?id=".$row['id']."'> <span class='badge bg-warning text-white'>Edit</span> </a>";
+                                      echo "<a href='?type=delete&id=".$row['id']."'> <span class='badge bg-danger text-white'>Delete</span> </a>";
+                                      
+                                    ?>
                                           
-                                       <span class="badge bg-success text-white">Active</span>
-                                       <span class="badge bg-primary text-white">Deactive</span>
-                                       <span class="badge bg-warning text-white">edit</span>   
-                                      <span class="badge bg-danger text-white">Delete</span> 
+                                       
                                       
                                     
                                    
                                         </th>
                                         
                         
-                                    </tr>
+                                        </tr>
+                                    <?php } ?>
                                  </tbody>
                               </table>
                            </div>

@@ -1,4 +1,22 @@
-<?php $title = "ADMIN-Receptionist"; include('header.php'); ?>
+<?php $title = "ADMIN-Receptionist"; include('header.php'); 
+
+include('../Database/function.php');
+include('../Database/connection.php');
+
+if(isset($_SESSION['ADMIN_LOGIN']) && $_SESSION['ADMIN_username']!=''){
+   $res = $_SESSION['ADMIN_username'];
+   
+   
+ 
+ }else{
+    header('location:login_admin.php');
+    die();
+ }
+
+
+
+
+?>
 <header>
 <?php $receptionist = "active";  include('sidemenu.php'); ?>
     <?php include('navbar.php') ?>
@@ -38,18 +56,20 @@
                                     </tr>
                                  </thead>
                                  <tbody>
-                                 
+                                 <?php
+                                 $sql = "SELECT * FROM `add_receptionist` ORDER BY `id` ASC";
+                                 $res = mysqli_query($con,$sql);
+                                 while($row = mysqli_fetch_assoc($res)) { ?>      
                                  <tr>
-                                 
-                                      
-                                
-                                      
-                                    
-                                   
-                                        
-                                        
+                                 <td><?php echo $row['id'] ?></td>
+                                 <td><?php echo $row['name'] ?></td>
+                                 <td><?php echo $row['address'] ?></td>
+                                 <td><?php echo $row['gender'] ?></td>
+                                 <td><?php echo $row['phone'] ?></td>
+        
                         
                                     </tr>
+                                    <?php } ?>
                                  </tbody>
                               </table>
                            </div>
