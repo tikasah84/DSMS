@@ -13,26 +13,24 @@ if(isset($_POST['submit'])){
    $email = get_safe_value($con,$_POST['email']);
    $pass = get_safe_value($con,$_POST['password']);
    
-   if($password=""){
-     header("Location:update_password.php");
-   }
+  //  if($password==""){
+  //    header("Location:update_password.php");
+  //  }
   
   
    
    
-   $sql = "select * from `add_receptionist` where email = '$email' and password = '$pass' ";
+   $sql = "select * from `add_receptionist` where email = '$email'";
    
    $res = mysqli_query($con,$sql);
    $data = mysqli_fetch_assoc($res);
-
+    
    
    if ( false===$res ) {
       printf("error: %s\n", mysqli_error($con));
       die();
     }
-    else {
-     
-  }
+    if(password_verify($pass, $data['password'])) {
   $count = mysqli_num_rows($res);
    if($count>0){
     
@@ -58,7 +56,7 @@ if(isset($_POST['submit'])){
 
 header('location:/Minor/Receptionist/billing.php');
 
-   }else{
+   }}else{
    
       $msg = "Plese enter correct login details";
    }

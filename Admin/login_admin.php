@@ -10,21 +10,25 @@ $msg='';
 if(isset($_POST['submit'])){
    $username = get_safe_value($con,$_POST['username']);
    $password = get_safe_value($con,$_POST['password']);
+   
   
    
    
-   $sql = "select * from `alogin` where username = '$username' and password = '$password' ";
+   $sql = "select * from `alogin` where username = '$username'";
    $res = mysqli_query($con,$sql);
    $data = mysqli_fetch_assoc($res);
-  
+
    
+
+
+
    if ( false===$res ) {
       printf("error: %s\n", mysqli_error($con));
       die();
     }
-    else {
-     
-  }
+    if(password_verify($password, $data['password'])) {
+    
+    
    $count = mysqli_num_rows($res);
    if($count>0){
     
@@ -47,7 +51,8 @@ if(isset($_POST['submit'])){
   
 header('location:/Minor/Admin/dashbord.php');
 
-   }else{
+   }
+  }else{
        $msg = "Plese enter correct login details";
      
    }

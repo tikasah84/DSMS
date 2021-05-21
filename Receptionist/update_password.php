@@ -29,8 +29,9 @@ if(isset($_SESSION['RECEP_LOGIN']) && $_SESSION['RECEP_email']!=''){
 
 if(isset($_POST['submit'])){
     $pass = get_safe_value($con,$_POST['password']);
+    $hashed_password = password_hash($pass, PASSWORD_DEFAULT);
     
-$sql = "UPDATE `add_receptionist` SET `password`='$pass' WHERE `email`='$email'";
+$sql = "UPDATE `add_receptionist` SET `password`='$hashed_password' WHERE `email`='$email'";
 
 $res = mysqli_query($con,$sql);
 if($res){

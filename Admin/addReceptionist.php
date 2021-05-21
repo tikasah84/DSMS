@@ -1,6 +1,7 @@
 <?php $title = "ADMIN-Add Receptionist"; include('header.php');
 
-
+$count=0;
+$exist='false';
 include('../Database/function.php');
 include('../Database/connection.php');
 if(isset($_SESSION['ADMIN_LOGIN']) && $_SESSION['ADMIN_username']!=''){
@@ -21,18 +22,29 @@ if(isset($_POST['submit'])){
   $email = get_safe_value($con,$_POST['email']);
   $gender = get_safe_value($con,$_POST['gender']);
  
-  $sql_count = "SELECT `id`, `name`, `address`, `gender`, `phone`, `email` FROM `add_receptionist` WHERE 1";
-   $res1 = mysqli_query($con,$sql_count);
-   $count = mysqli_num_rows($res1);
+ 
+   
+   $res = mysqli_query($con,"select * from `add_receptionist` where email='$email'");
+   
+   while($row = mysqli_fetch_assoc($res)) { 
+     
+     if($email == $row['email']){
+       $exist='true';
+       }
+    }
    $count++;
   
-  
-  $sql = "INSERT INTO `add_receptionist`(`id`, `name`, `address`, `gender`, `phone`, `email`) VALUES ('$count','$name','$address','$gender','$phone','$email')";
+  if($exist=='false'){
+    $sql = "INSERT INTO `add_receptionist`(`id`, `name`, `address`, `gender`, `phone`, `email`) VALUES ('$count','$name','$address','$gender','$phone','$email')";
   $res = mysqli_query($con,$sql);
+  $exist='done';
   if ( false===$res ) {
     printf("error: %s\n", mysqli_error($con));
     die();
   }
+
+  }
+  
   }
   
 
@@ -106,4 +118,22 @@ if(isset($_POST['submit'])){
         </div>
       </section>
     <!-- Sidebar -->
-<?php include('footer.php'); ?>
+<?php
+if($exist=='true'){
+  ?>
+  <script>
+    toastr.error('Email already exist', 'Duplicate');
+  </script>
+
+  <?php
+}
+if($exist=='done'){
+  ?>
+  <script>
+    toastr.success('Done');
+  </script>
+
+  <?php
+
+}
+include('footer.php'); ?>

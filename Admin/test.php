@@ -10,14 +10,17 @@
     <script src="toast.js"></script>
 </head>
 <body>
-<button onclick="toastr.info('Are you the 6 fingered man?')">clickme</button>
-<script>
-     function test(){
-        
-        
-    }
 
-</script>
+<?php 
+$password = "";
+$hashed_password = password_hash($password, PASSWORD_DEFAULT);
+echo $hashed_password;
+$password = "";
+if(password_verify($password, $hashed_password)) {
+    echo "<p>done</p>";
+}
+
+?>
 <script src="toast.js"></script>
 </body>
 </html>
