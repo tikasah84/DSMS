@@ -1,0 +1,45 @@
+.search {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  margin-top: 20px;
+}
+.search1 {
+  margin-left: 10px;
+}
+
+.contain {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: row;
+  padding: auto;
+  justify-content: space-between;
+}
+
+.bill {
+  flex: 0.6;
+}
+
+.sidenav {
+  margin-right: 15px;
+  flex: 0.2;
+  color: black;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.row {
+  margin: auto;
+  width: 90%;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.row div {
+  margin-bottom: 15px;
+}
+
+.row input {
+  border: none;
+  background-color: transparent;
+  resize: none;
+  outline: none;
+}

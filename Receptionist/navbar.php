@@ -10,7 +10,7 @@ if(isset($_SESSION['RECEP_LOGIN']) && $_SESSION['RECEP_email']!=''){
 
 }
 ?>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
   <div class="container-fluid ">
     <button
       class="navbar-toggler"
@@ -23,14 +23,14 @@ if(isset($_SESSION['RECEP_LOGIN']) && $_SESSION['RECEP_email']!=''){
     >
       <i class="fas fa-bars"></i>
     </button>
-    <a class="navbar-brand" href="#">Receptionist </a>
-    <div class="collapse navbar-collapse " id="navbarTogglerDemo03">
-      <ul class="navbar-nav ">
+    <a class="navbar-brand" href="#" style="color:white;">Receptionist </a>
+    <div class="collapse navbar-collapse " id="navbarTogglerDemo03" >
+      <ul class="navbar-nav " >
         <li class="nav-item">
-          <a class="nav-link <?php echo $billing?>" aria-current="page" href="billing.php">Billing</a>
+          <a class="nav-link  <?php echo $billing?>" style="color:white;" aria-current="page" href="billing.php">Billing</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link <?php echo $add_customer?>" href="addCustomer.php">Add Customer</a>
+          <a class="nav-link <?php echo $add_customer?>" style="color:white;" href="addCustomer.php">Add Customer</a>
         </li>
         </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent"></div>
@@ -40,6 +40,7 @@ if(isset($_SESSION['RECEP_LOGIN']) && $_SESSION['RECEP_email']!=''){
       
 
       <!-- Avatar -->
+      
       <a
         class="dropdown-toggle d-flex align-items-center hidden-arrow"
         href="#"
@@ -47,8 +48,11 @@ if(isset($_SESSION['RECEP_LOGIN']) && $_SESSION['RECEP_email']!=''){
         role="button"
         data-mdb-toggle="dropdown"
         aria-expanded="false"
+        style="color:white;"
       >
+      <i class="fas fa-user-shield"></i>
       <?php echo $name; ?>
+      
       </a>
       <ul
         class="dropdown-menu dropdown-menu-end"

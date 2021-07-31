@@ -1,4 +1,28 @@
-<?php include('header.php'); ?>
+<?php include('header.php');
+include('../Database/function.php');
+include('../Database/connection.php');
+$name = '';
+$amt = 0;
+$id=0;
+if(isset($_POST['submit'])){
+  $cid = get_safe_value($con,$_POST['cid']);
+  $res = mysqli_fetch_assoc(mysqli_query($con,"SELECT * FROM add_customer where `id`='$cid'"));
+  $name = $res['name'];
+ $amt = 0;
+ $id=1;
+}
+
+
+
+
+
+
+
+?>
+
+<style>
+	<?php include 'CSS/admin.css'; ?>
+</style>
 <!-- Navbar-->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid justify-content-between">
@@ -16,57 +40,23 @@
       </a>
 
       <!-- Search form -->
-      <form class="input-group w-auto my-auto d-none d-sm-flex">
+      <form class="input-group w-auto my-auto d-none d-sm-flex" action="index.php" method="post">
         <input
           autocomplete="off"
           type="search"
+          name="cid"
           class="form-control rounded"
           placeholder="Search"
           style="min-width: 125px;"
         />
-        <span class="input-group-text border-0 d-none d-lg-flex"
+        <button type="submit" name="submit" class="input-group-text border-0 d-none d-lg-flex"
           ><i class="fas fa-search"></i
-        ></span>
+        ></button>
       </form>
     </div>
     <!-- Left elements -->
 
-    <!-- Center elements -->
-    <ul class="navbar-nav flex-row d-none d-md-flex">
-      <li class="nav-item me-3 me-lg-1 active">
-        <a class="nav-link" href="#">
-          <span><i class="fas fa-home fa-lg"></i></span>
-          <span class="badge rounded-pill badge-notification bg-danger">1</span>
-        </a>
-      </li>
-
-      <li class="nav-item me-3 me-lg-1">
-        <a class="nav-link" href="#">
-          <span><i class="fas fa-flag fa-lg"></i></span>
-        </a>
-      </li>
-
-      <li class="nav-item me-3 me-lg-1">
-        <a class="nav-link" href="#">
-          <span><i class="fas fa-video fa-lg"></i></span>
-        </a>
-      </li>
-
-      <li class="nav-item me-3 me-lg-1">
-        <a class="nav-link" href="#">
-          <span><i class="fas fa-shopping-bag fa-lg"></i></span>
-        </a>
-      </li>
-
-      <li class="nav-item me-3 me-lg-1">
-        <a class="nav-link" href="#">
-          <span><i class="fas fa-users fa-lg"></i></span>
-          <span class="badge rounded-pill badge-notification bg-danger">2</span>
-        </a>
-      </li>
-    </ul>
-    <!-- Center elements -->
-
+    
     <!-- Right elements -->
     <ul class="navbar-nav flex-row">
       <li class="nav-item me-3 me-lg-1">
@@ -78,88 +68,77 @@
             alt=""
             loading="lazy"
           />
-          <strong class="d-none d-sm-block ms-1">John</strong>
+          <strong class="d-none d-sm-block ms-1"><?php echo $name ?></strong>
         </a>
       </li>
-      <li class="nav-item me-3 me-lg-1">
-        <a class="nav-link" href="#">
-          <span><i class="fas fa-plus-circle fa-lg"></i></span>
-        </a>
-      </li>
-      <li class="nav-item dropdown me-3 me-lg-1">
-        <a
-          class="nav-link dropdown-toggle hidden-arrow"
-          href="#"
-          id="navbarDropdownMenuLink"
-          role="button"
-          data-mdb-toggle="dropdown"
-          aria-expanded="false"
-        >
-          <i class="fas fa-comments fa-lg"></i>
-
-          <span class="badge rounded-pill badge-notification bg-danger">6</span>
-        </a>
-        <ul
-          class="dropdown-menu dropdown-menu-end"
-          aria-labelledby="navbarDropdownMenuLink"
-        >
-          <li><a class="dropdown-item" href="#">Some news</a></li>
-          <li><a class="dropdown-item" href="#">Another news</a></li>
-          <li>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </li>
-        </ul>
-      </li>
-      <li class="nav-item dropdown me-3 me-lg-1">
-        <a
-          class="nav-link dropdown-toggle hidden-arrow"
-          href="#"
-          id="navbarDropdownMenuLink"
-          role="button"
-          data-mdb-toggle="dropdown"
-          aria-expanded="false"
-        >
-          <i class="fas fa-bell fa-lg"></i>
-          <span class="badge rounded-pill badge-notification bg-danger">12</span>
-        </a>
-        <ul
-          class="dropdown-menu dropdown-menu-end"
-          aria-labelledby="navbarDropdownMenuLink"
-        >
-          <li><a class="dropdown-item" href="#">Some news</a></li>
-          <li><a class="dropdown-item" href="#">Another news</a></li>
-          <li>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </li>
-        </ul>
-      </li>
-      <li class="nav-item dropdown me-3 me-lg-1">
-        <a
-          class="nav-link dropdown-toggle hidden-arrow"
-          href="#"
-          id="navbarDropdownMenuLink"
-          role="button"
-          data-mdb-toggle="dropdown"
-          aria-expanded="false"
-        >
-          <i class="fas fa-chevron-circle-down fa-lg"></i>
-        </a>
-        <ul
-          class="dropdown-menu dropdown-menu-end"
-          aria-labelledby="navbarDropdownMenuLink"
-        >
-          <li><a class="dropdown-item" href="#">Some news</a></li>
-          <li><a class="dropdown-item" href="#">Another news</a></li>
-          <li>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </li>
-        </ul>
-      </li>
-    </ul>
+          </ul>
     <!-- Right elements -->
   </div>
 </nav>
 <!-- Navbar -->
+
+<?php
+
+if($name!=''){
+  ?>
+
+<div class="card-body">
+                           <div class="table-stats order-table ov-h">
+                              <table class="table ">
+                                 <thead>
+                                     
+                                    <tr>
+                                      
+                                       <th>id</th>
+                                       <th>Receptionist</th>
+                                       <th>Amount</th>
+                                       <th>Date</th>
+                                       
+                        
+                                    </tr>
+                                 </thead>
+                                 <tbody>
+                                 
+                                 <?php
+                                
+                                 $res =  mysqli_query($con,"SELECT * FROM sale where `customer`='$name'");
+                                 while($row = mysqli_fetch_assoc($res)) {
+                                 
+                                  $amt=$amt + $row['amount'];
+                                   ?>      
+                                 <tr>
+                                 
+                                 <td><?php echo $id ?></td>
+                                 <td><?php echo $row['receptionist'] ?></td>
+                                 <td><?php echo $row['amount'] ?></td>
+                                 <td><?php echo $row['date'] ?></td>
+                                
+        
+        
+          
+                                        
+                        
+                                        </tr>
+                                    <?php 
+                                   $id++;
+                                   }
+                                   
+                                     ?>
+                                    <th>Total</th>
+                                    <td></td>
+                                    <td></td>
+                                    
+                                    <th><?php echo $amt; ?></th>
+                                 </tbody>
+                              </table>
+                           </div>
+                        </div>
+                     </div>
+
+<?php
+    }else{
+?>
+
 <!-- Carousel wrapper -->
 <div
   id="carouselDarkVariant"
@@ -192,39 +171,39 @@
     <!-- Single item -->
     <div class="carousel-item active">
       <img
-        src="https://mdbootstrap.com/img/Photos/Slides/img%20(19).jpg"
+        src="img/photo1.jpg"
         class="d-block w-100"
         alt="..."
+        
       />
       <div class="carousel-caption d-none d-md-block">
-        <h5>First slide label</h5>
-        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+        
       </div>
     </div>
 
     <!-- Single item -->
     <div class="carousel-item">
       <img
-        src="https://mdbootstrap.com/img/Photos/Slides/img%20(35).jpg"
+        src="img/photo2.jpg"
         class="d-block w-100"
         alt="..."
+        
       />
       <div class="carousel-caption d-none d-md-block">
-        <h5>Second slide label</h5>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        
       </div>
     </div>
 
     <!-- Single item -->
     <div class="carousel-item">
       <img
-        src="https://mdbootstrap.com/img/Photos/Slides/img%20(40).jpg"
+        src="img/photo3.png"
         class="d-block w-100"
         alt="..."
+        
       />
       <div class="carousel-caption d-none d-md-block">
-        <h5>Third slide label</h5>
-        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+        
       </div>
     </div>
   </div>
@@ -266,7 +245,7 @@
             data-ripple-color="light"
           >
             <img
-              src="https://mdbootstrap.com/img/new/fluid/city/113.jpg"
+              src="img/comp1.jpg"
               class="w-100"
             />
             <a href="#!">
@@ -283,7 +262,7 @@
             data-ripple-color="light"
           >
             <img
-              src="https://mdbootstrap.com/img/new/fluid/city/111.jpg"
+              src="img/comp2.jpg"
               class="w-100"
             />
             <a href="#!">
@@ -300,7 +279,7 @@
             data-ripple-color="light"
           >
             <img
-              src="https://mdbootstrap.com/img/new/fluid/city/112.jpg"
+              src="img/comp3.jpg"
               class="w-100"
             />
             <a href="#!">
@@ -317,7 +296,7 @@
             data-ripple-color="light"
           >
             <img
-              src="https://mdbootstrap.com/img/new/fluid/city/114.jpg"
+              src="img/comp4.jpg"
               class="w-100"
             />
             <a href="#!">
@@ -334,7 +313,7 @@
             data-ripple-color="light"
           >
             <img
-              src="https://mdbootstrap.com/img/new/fluid/city/115.jpg"
+              src="img/comp5.jpg"
               class="w-100"
             />
             <a href="#!">
@@ -351,7 +330,7 @@
             data-ripple-color="light"
           >
             <img
-              src="https://mdbootstrap.com/img/new/fluid/city/116.jpg"
+              src="img/comp6.jpg"
               class="w-100"
             />
             <a href="#!">
@@ -390,14 +369,7 @@
         ><i class="fab fa-twitter"></i
       ></a>
 
-      <!-- Google -->
-      <a
-        class="btn btn-primary btn-floating m-1"
-        style="background-color: #dd4b39;"
-        href="#!"
-        role="button"
-        ><i class="fab fa-google"></i
-      ></a>
+     
 
       <!-- Instagram -->
       <a
@@ -409,30 +381,18 @@
       ></a>
 
       <!-- Linkedin -->
-      <a
-        class="btn btn-primary btn-floating m-1"
-        style="background-color: #0082ca;"
-        href="#!"
-        role="button"
-        ><i class="fab fa-linkedin-in"></i
-      ></a>
-      <!-- Github -->
-      <a
-        class="btn btn-primary btn-floating m-1"
-        style="background-color: #333333;"
-        href="#!"
-        role="button"
-        ><i class="fab fa-github"></i
-      ></a>
+      
     </section>
     <!-- Section: Social media -->
   </div>
   <!-- Grid container -->
-
+<?php
+}
+?>
   <!-- Copyright -->
   <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-    © 2020 Copyright:
-    <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+    © 2021 Copyright:
+    <a class="text-white" href="https://mdbootstrap.com/"></a>
   </div>
   <!-- Copyright -->
 </footer>

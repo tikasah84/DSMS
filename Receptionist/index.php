@@ -69,7 +69,7 @@ header('location:/Minor/Receptionist/billing.php');
   <header>
     <style>
       #intro {
-        background-image: url(./images/background.jpg);
+        background-image: url(./img/background.jpg);
         height: 109vh;
       }
 

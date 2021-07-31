@@ -21,6 +21,9 @@ if(isset($_SESSION['ADMIN_LOGIN']) && $_SESSION['ADMIN_username']!=''){
    die();
 }
 
+header("Location: http://localhost/Minor/Admin/stocks.php");
+exist();
+
 ?>
 
 <body>

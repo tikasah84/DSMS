@@ -49,7 +49,7 @@ if(isset($_POST['submit'])){
 				}
     }
   
-header('location:/Minor/Admin/dashbord.php');
+header('location:/Minor/Admin/stocks.php');
 
    }
   }else{
